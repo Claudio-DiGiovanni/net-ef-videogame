@@ -49,5 +49,10 @@ namespace net_ef_videogame.models
             context.SaveChanges();
         }
 
+        public List<Videogame> GetVideogamesBySoftwareHouseId(long softwareHouseId)
+        {
+            using var context = new VideogameContext();
+            return context.Videogames.Where(v => v.SoftwareHouseId == softwareHouseId).ToList();
+        }
     }
 }

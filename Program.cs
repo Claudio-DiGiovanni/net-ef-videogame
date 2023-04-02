@@ -13,7 +13,8 @@ while (true)
         Console.WriteLine("ricercare tutti i videogiochi aventi il nome contenente una determinata stringa inserita in input (3 o 'filtra')");
         Console.WriteLine("eliminare un videogioco (4 o 'elimina')");
         Console.WriteLine("aggiungere una software house (5 o 'aggiungi software house')");
-        Console.WriteLine("chiudere il programma (6 o 'chiudi')");
+        Console.WriteLine("ricercare tutti i giochi prodotti da una software house (6 o 'cerca per software house')");
+        Console.WriteLine("chiudere il programma (7 o 'chiudi')");
 
         var input = Console.ReadLine();
 
@@ -88,10 +89,26 @@ while (true)
                 softwareHouse.City = city;
                 softwareHouse.Country = country;
                 videogameManager.InsertSoftwareHouse(softwareHouse);
-
                 break;
             }
         case 6:
+            {
+                Console.Write("Passa l'id della software house: ");
+
+                var id = Convert.ToInt64(Console.ReadLine());
+                var vg = videogameManager.GetVideogamesBySoftwareHouseId(id);
+
+                if (vg is null) Console.WriteLine("software house non trovata.");
+                else
+                {
+                    foreach (var v in vg)
+                    {
+                        Console.WriteLine(v.ToString());
+                    }
+                };
+                break;
+            }
+        case 7:
             Console.WriteLine("Esco.");
             return;
     }
@@ -117,8 +134,11 @@ int identificaOpzione(string? input)
         case "aggiungi software house":
             return 5;
         case "6":
-        case "chiudi":
+        case "cerca per software house":
             return 6;
+        case "7":
+        case "chiudi":
+            return 7;
         default:
             Console.WriteLine("Input non valido.");
             return 0;
