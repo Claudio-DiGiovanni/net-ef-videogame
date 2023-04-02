@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,21 +9,18 @@ using System.Threading.Tasks;
 
 namespace net_ef_videogame.models
 {
-    public record Videogame
+    [Table("videogames")]
+    [Index(nameof(Id))]
+    public class Videogame
     {
-        public Videogame(long id, string name, string overview, string releaseDate, long softwareHouseId)
-        {
-            Id = id;
-            Name = name;
-            Overview = overview;
-            ReleaseDate = Convert.ToDateTime(releaseDate);
-            SoftwareHouseId = softwareHouseId;
-        }
 
         public long Id { get; set; }
-        public string Name { get; set; }
-        public string Overview { get; set; }
+        public string? Name { get; set; }
+        public string? Overview { get; set; }
         public DateTime ReleaseDate { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
         public long SoftwareHouseId { get; set; }
+        public SoftwareHouse? SoftwareHouse { get; set; }
     }
 }
