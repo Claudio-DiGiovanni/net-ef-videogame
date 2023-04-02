@@ -42,5 +42,12 @@ namespace net_ef_videogame.models
             return context.Videogames.Where(v => v.Name.Contains(input)).ToList();
         }
 
+        public void InsertSoftwareHouse(SoftwareHouse softwarehouse)
+        {
+            using var context = new VideogameContext();
+            context.SoftwareHouses.Add(softwarehouse);
+            context.SaveChanges();
+        }
+
     }
 }
